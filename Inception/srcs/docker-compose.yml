@@ -1,0 +1,71 @@
+version: "3"
+services:
+
+  # Mariadb DataBase
+  mariadb:
+    build: ./requirements/mariadb/
+    image: mariadb
+    container_name: mariadb
+    restart: always
+    volumes:
+      - /home/fel-boua/data/db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - issam_net
+    env_file:
+      - .env
+
+  # Nginx Web Server
+  nginx:
+    build: ./requirements/nginx/
+    image: nginx
+    container_name: nginx
+    restart: always
+    depends_on:
+      - mariadb
+    volumes:
+      - /home/fel-boua/data/wp-data:/www/wordpress
+    ports:
+      - "443:443"
+    networks:
+      - issam_net
+    env_file:
+      - .env
+  
+  # WordPress
+  wordpress:
+    build: ./requirements/wordpress
+    image: wordpress
+    container_name: wordpress
+    restart: always
+    depends_on:
+      - nginx
+    volumes:
+      - /home/fel-boua/data/wp-data:/www/wordpress
+    ports:
+      - "9000:9000"
+    networks:
+      - issam_net
+    env_file:
+      - .env
+
+  # Adminer
+  adminer:
+    build: ./requirements/bonus/adminer/
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - '5000:5000'
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+    volumes:
+      - /home/fel-boua/data/db-data:/var/lib/mysql
+    networks:
+      - issam_net
+
+networks:
+  issam_net:
