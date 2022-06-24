@@ -20,8 +20,6 @@ COPY ./conf/nginx.conf /etc/nginx/
 
 # Install OpenSSL and Genarate SSL cert
 RUN apk add openssl
-# RUN mkdir /etc/ssl/private
-# RUN chmod 700 /etc/ssl/private
 RUN openssl req -x509 -nodes -days 365 -subj "/C=MA/ST=Beni Mellal-Khenifra/L=Khouribga/O=1337 - 42 Network/CN=fel-boua.42.fr" -addext "subjectAltName=DNS:fel-boua.42.fr" -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt;
   # C=Country Name (2 letter code)=MA
   # ST=State or Province Name (full name)=Beni Mellal-Khenifra

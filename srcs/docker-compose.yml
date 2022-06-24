@@ -12,7 +12,7 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - issam_net
+      - fatine_net
     env_file:
       - .env
 
@@ -29,7 +29,7 @@ services:
     ports:
       - "443:443"
     networks:
-      - issam_net
+      - fatine_net
     env_file:
       - .env
   
@@ -38,7 +38,7 @@ services:
     build: ./requirements/wordpress
     image: wordpress
     container_name: wordpress
-    restart: always
+    restart: always 
     depends_on:
       - nginx
     volumes:
@@ -46,7 +46,7 @@ services:
     ports:
       - "9000:9000"
     networks:
-      - issam_net
+      - fatine_net
     env_file:
       - .env
 
@@ -65,7 +65,7 @@ services:
     volumes:
       - /home/fel-boua/data/db-data:/var/lib/mysql
     networks:
-      - issam_net
+      - fatine_net
 
 networks:
-  issam_net:
+  fatine_net:

@@ -18,7 +18,7 @@ RUN rm wordpress-5.9.3.tar.gz
 RUN rm wordpress/wp-config-sample.php
 
 # # Download WP
-# RUN git clone https://github.com/issamelferkh/wordpress_for_inception.git wordpress
+# RUN git clone wordpress
 # RUN rm wordpress/wp-config-sample.php
 
 # Copy Config and Script
