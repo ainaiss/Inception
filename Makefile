@@ -93,3 +93,4 @@ volumes:
 	@echo "$(GREEN)################### Creating volumes ###################$(RESET)"
 	mkdir -p $(HOME)/data/db-data
 	mkdir -p $(HOME)/data/wp-data
+		`

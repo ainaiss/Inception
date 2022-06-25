@@ -67,5 +67,71 @@ services:
     networks:
       - fatine_net
 
+  # # Portfolio
+  # portfolio:
+  #   build: ./requirements/bonus/portfolio/
+  #   image: portfolio
+  #   container_name: portfolio
+  #   restart: always
+  #   ports:
+  #     - '5001:80'
+  #   networks:
+  #     - fatine_net
+
+  # FTP
+  # ftp:
+  #   build: ./requirements/bonus/ftp/
+  #   image: ftp
+  #   container_name: ftp
+  #   restart: always
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - /home/fel-boua/data/wp-data:/www/wordpress
+  #   ports:
+  #     - '2211:21'
+  #     - '21000-22000:21000-22000'
+  #   networks:
+  #     - fatine_net
+
+  # Game
+  game:
+    build: ./requirements/bonus/game/
+    image: game
+    container_name: game
+    restart: always
+    ports:
+      - 5010:80
+    networks:
+      - fatine_net
+      
+  # WebSite
+  website:
+    build: ./requirements/bonus/website/
+    image: website
+    container_name: website
+    restart: always
+    ports:
+      - 5020:80
+    networks:
+      - fatine_net
+  
+  # Redis
+  redis:
+    build: ./requirements/bonus/redis/
+    image: redis
+    container_name: redis
+    restart: always
+    depends_on:
+      - wordpress
+    env_file:
+      - .env
+    volumes:
+      - /home/fel-boua/data/wp-data:/www/wordpress
+    ports:
+      - '6379:6379'
+    networks:
+      - fatine_net
+
 networks:
   fatine_net:
